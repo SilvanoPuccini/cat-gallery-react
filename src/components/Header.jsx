@@ -1,4 +1,4 @@
-import catLogo from '/assets/favicon/apple-touch-icon.png'
+import catLogo from '/assets/favicon/cat-logo-128.svg'
 
 function Header({ favoritesCount, onToggleFavorites }) {
   return (

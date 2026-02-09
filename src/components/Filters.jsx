@@ -1,4 +1,4 @@
-function Filters({ breeds, filters, onBreedChange, onOrderChange, onToggleMime, onReset, onApply }) {
+function Filters({ breeds, filters, onBreedChange, onOrderChange, onReset, onApply }) {
   return (
     <div className="filters">
       <label>
@@ -20,19 +20,6 @@ function Filters({ breeds, filters, onBreedChange, onOrderChange, onToggleMime, 
           <option value="RANDOM">Aleatorio</option>
         </select>
       </label>
-      <div className="filters-types">
-        <span>Tipo:</span>
-        {['jpg', 'png', 'gif'].map((type) => (
-          <label key={type} className="filters-checkbox">
-            <input
-              type="checkbox"
-              checked={filters.mimeTypes.includes(type)}
-              onChange={() => onToggleMime(type)}
-            />
-            {type.toUpperCase()}
-          </label>
-        ))}
-      </div>
       <div className="filters-actions">
         <button type="button" onClick={onReset}>
           Limpiar

@@ -9,7 +9,7 @@
 /* BASE */
 body {
   font-family: "Segoe UI", system-ui, sans-serif;
-  background: radial-gradient(circle at top, #1b1b1b, #0b0b0b);
+  background: radial-gradient(circle at top, #14151f, #0a0b12 55%, #050507);
   color: #ffffff;
   min-height: 100vh;
 }
@@ -17,7 +17,7 @@ body {
 /* HEADER */
 .header {
   text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
+  padding: 4rem 1rem 1.5rem;
   position: relative;
 }
 
@@ -34,8 +34,14 @@ body {
 }
 
 .header h1 {
-  font-size: 2.6rem;
-  letter-spacing: 0.5px;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, #ffffff, #ff7a18, #ff2d55);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 12px 30px rgba(255, 45, 85, 0.35);
 }
 
 .header p {
@@ -78,20 +84,28 @@ button.favorite {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: transparent;
-  border: none;
-  font-size: 1.6rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.3rem;
   cursor: pointer;
   color: #fff;
   padding: 0;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 button.favorite:hover {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.6));
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7));
 }
 button.favorite.active {
-  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.9));
+  background: rgba(255, 77, 77, 0.95);
+  box-shadow: 0 0 14px rgba(255, 77, 77, 0.8);
 }
 
 .gallery button.favorite {
@@ -105,6 +119,12 @@ button.favorite.active {
   gap: 1rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: rgba(24, 24, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  padding-right: 220px;
 }
 
 .filters label {
@@ -115,13 +135,14 @@ button.favorite.active {
 }
 
 .filters select {
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  border: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 122, 24, 0.4);
   outline: none;
   cursor: pointer;
   font-size: 0.9rem;
-  background: #fff;
+  background: #0f1018;
+  color: #fff;
 }
 
 .filters-types {
@@ -143,16 +164,22 @@ button.favorite.active {
 }
 
 .filters-actions button {
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
-  background: #262626;
+  background: #1f202b;
   color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters-actions button:hover {
+  transform: translateY(-1px);
 }
 
 .filters-actions button.primary {
-  background: #ff4d4d;
+  background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
+  box-shadow: 0 8px 24px rgba(255, 77, 77, 0.4);
 }
 
 /* MODAL DE DETALLE */
@@ -275,16 +302,18 @@ body.favorites-open .gallery {
 
 .gallery .cat-card {
   position: relative;
-  border-radius: 14px;
+  border-radius: 18px;
   overflow: hidden;
-  background: #111;
+  background: #0f0f16;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 122, 24, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery .cat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(255, 122, 24, 0.3);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 50px rgba(255, 122, 24, 0.35);
 }
 
 .gallery .cat-card img {
@@ -377,8 +406,8 @@ body.favorites-open .gallery-wrapper {
 /* BOTÓN FLOTANTE DE FAVORITOS */
 .favorites-btn {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 1.5rem;
+  right: 1.5rem;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   background: linear-gradient(135deg, #ff4d4d, #ff1f1f);

@@ -29,7 +29,6 @@ function App() {
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false)
   const [filters, setFilters] = useState({
     breedId: '',
-    mimeTypes: ['jpg'],
     order: 'RANDOM',
   })
 
@@ -37,6 +36,7 @@ function App() {
   const wrapperRef = useRef(null)
 
   const favoriteIds = useMemo(() => new Set(favorites.map((item) => item.id)), [favorites])
+  const breedMap = useMemo(() => new Map(breeds.map((breed) => [breed.id, breed])), [breeds])
 
   useEffect(() => {
     setFavorites(getStoredFavorites())
@@ -76,15 +76,10 @@ function App() {
           limit: LIMIT.toString(),
           page: nextPage.toString(),
           order: filters.order,
-          has_breeds: '1',
         })
 
         if (filters.breedId) {
           params.set('breed_ids', filters.breedId)
-        }
-
-        if (filters.mimeTypes.length > 0) {
-          params.set('mime_types', filters.mimeTypes.join(','))
         }
 
         const response = await fetch(`${API_BASE}/images/search?${params.toString()}`)
@@ -92,14 +87,23 @@ function App() {
           throw new Error('No pudimos cargar las imágenes. Intenta nuevamente.')
         }
         const data = await response.json()
-        setCats((prev) => (reset ? data : [...prev, ...data]))
+        const enriched = data.map((cat) => {
+          if (cat.breeds?.length) {
+            return cat
+          }
+          if (filters.breedId && breedMap.has(filters.breedId)) {
+            return { ...cat, breeds: [breedMap.get(filters.breedId)] }
+          }
+          return cat
+        })
+        setCats((prev) => (reset ? enriched : [...prev, ...enriched]))
       } catch (error) {
         setError(error.message)
       } finally {
         setLoading(false)
       }
     },
-    [filters],
+    [filters, breedMap],
   )
 
   useEffect(() => {
@@ -156,18 +160,7 @@ function App() {
   const handleResetFilters = () => {
     setFilters({
       breedId: '',
-      mimeTypes: ['jpg'],
       order: 'RANDOM',
-    })
-  }
-
-  const handleMimeToggle = (value) => {
-    setFilters((prev) => {
-      const exists = prev.mimeTypes.includes(value)
-      return {
-        ...prev,
-        mimeTypes: exists ? prev.mimeTypes.filter((item) => item !== value) : [...prev.mimeTypes, value],
-      }
     })
   }
 
@@ -181,7 +174,6 @@ function App() {
             filters={filters}
             onBreedChange={(event) => setFilters((prev) => ({ ...prev, breedId: event.target.value }))}
             onOrderChange={(event) => setFilters((prev) => ({ ...prev, order: event.target.value }))}
-            onToggleMime={handleMimeToggle}
             onReset={handleResetFilters}
             onApply={handleApplyFilters}
           />
