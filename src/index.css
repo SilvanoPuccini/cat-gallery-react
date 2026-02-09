@@ -610,6 +610,7 @@ body.favorites-open .favorites-panel {
   .filters {
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 0;
   }
 
   .favorites-btn {
