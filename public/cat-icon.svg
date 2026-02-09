@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Cat icon">
+  <defs>
+    <linearGradient id="fur" x1="0" x2="1">
+      <stop offset="0" stop-color="#38bdf8" />
+      <stop offset="1" stop-color="#2dd4bf" />
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#fur)"
+    d="M20 54c0-19 11-34 28-41l6 18c3-2 7-3 10-3s7 1 10 3l6-18c17 7 28 22 28 41 0 30-22 58-44 58S20 84 20 54z"
+  />
+  <circle cx="48" cy="58" r="6" fill="#0f172a" />
+  <circle cx="80" cy="58" r="6" fill="#0f172a" />
+  <path
+    d="M64 70c6 0 10 4 10 8s-4 8-10 8-10-4-10-8 4-8 10-8z"
+    fill="#0f172a"
+  />
+  <path
+    d="M40 74c6 4 12 6 24 6s18-2 24-6"
+    stroke="#0f172a"
+    stroke-width="4"
+    fill="none"
+    stroke-linecap="round"
+  />
+</svg>
