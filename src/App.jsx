@@ -76,6 +76,7 @@ function App() {
           limit: LIMIT.toString(),
           page: nextPage.toString(),
           order: filters.order,
+          has_breeds: '1',
         })
 
         if (filters.breedId) {
