@@ -17,7 +17,7 @@ body {
 /* HEADER */
 .header {
   text-align: center;
-  padding: 4rem 1rem 1.5rem;
+  padding: 2.5rem 1rem 1.5rem;
   position: relative;
 }
 
@@ -105,7 +105,6 @@ button.favorite.active {
   gap: 1rem;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
-  padding-right: 220px;
 }
 
 .filters label {
@@ -378,8 +377,8 @@ body.favorites-open .gallery-wrapper {
 /* BOTÓN FLOTANTE DE FAVORITOS */
 .favorites-btn {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 2rem;
+  right: 2rem;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
