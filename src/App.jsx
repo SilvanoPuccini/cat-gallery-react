@@ -88,9 +88,29 @@ function App() {
           throw new Error('No pudimos cargar las imágenes. Intenta nuevamente.')
         }
         const data = await response.json()
+        const missingBreedIds = data.filter((cat) => !cat.breeds?.length).map((cat) => cat.id)
+        const extraBreedData = await Promise.all(
+          missingBreedIds.map(async (id) => {
+            try {
+              const detailResponse = await fetch(`${API_BASE}/images/${id}`)
+              if (!detailResponse.ok) {
+                return null
+              }
+              return await detailResponse.json()
+            } catch (error) {
+              return null
+            }
+          }),
+        )
+        const breedsById = new Map(
+          extraBreedData.filter(Boolean).map((detail) => [detail.id, detail.breeds ?? []]),
+        )
         const enriched = data.map((cat) => {
           if (cat.breeds?.length) {
             return cat
+          }
+          if (breedsById.has(cat.id) && breedsById.get(cat.id).length) {
+            return { ...cat, breeds: breedsById.get(cat.id) }
           }
           if (filters.breedId && breedMap.has(filters.breedId)) {
             return { ...cat, breeds: [breedMap.get(filters.breedId)] }
